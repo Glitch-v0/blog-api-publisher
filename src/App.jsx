@@ -1,9 +1,9 @@
-import Navbar from "./components/Navbar.jsx";
+import NavBar from "./components/NavBar.jsx";
 
 function App() {
   return (
     <>
-      <Navbar />
+      <NavBar />
       <h1>Welcome to the publisher front end!</h1>
     </>
   );

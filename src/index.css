@@ -1,5 +1,20 @@
+:root {
+  --nav-background-color: hsl(260, 100%, 97%);
+  --posts-background-color: #eee6fd;
+  --post-color: hsl(260, 80%, 90%);
+  --posts-border-color: #fff;
+  --error-color: rgb(240, 78, 78);
+}
+
+body {
+  display: flex;
+  text-align: center;
+  background-color: var(--posts-background-color);
+}
+
 nav {
-  width: 100%;
+  width: 100vw;
+  margin-bottom: 3rem;
   ul {
     display: flex;
     justify-content: space-around;
@@ -8,4 +23,27 @@ nav {
       text-decoration: none;
     }
   }
+}
+
+.postContainer,
+header {
+  padding: 2rem;
+}
+
+.postContainer .post:nth-child(odd) {
+  background-color: var(--post-color);
+}
+
+.post {
+  margin: 1rem;
+  padding: 3rem;
+}
+
+.postDetails {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.error {
+  color: var(--error-color);
 }
