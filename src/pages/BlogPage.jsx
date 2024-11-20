@@ -1,14 +1,15 @@
+import { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import AddPost from "../components/AddPost";
 import toTitleCase from "../utils/stringMethods";
-import { useState, useEffect } from "react";
+import formatDate from "../utils/formatDate";
 
 export default function BlogPage() {
   const [posts, setPosts] = useState([]);
 
   // Get posts
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/posts")
+    fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/posts`)
       .then((response) => response.json())
       .then((data) => setPosts(data));
   }, [setPosts]);
@@ -23,11 +24,11 @@ export default function BlogPage() {
       <div className="postContainer">
         {posts.map((post) => (
           <div className="post" key={post.id}>
+            <a href=""></a>
             <h2>{toTitleCase(post.title)}</h2>
-            <p className="postBody">&ldquo;{post.body}&rdquo;</p>
+            <p className="postBody">&ldquo;{post.content}&rdquo;</p>
             <div className="postDetails">
-              <p>Author: {post.userId}</p>
-              <p>Date: {post.date}</p>
+              <p>Date: {formatDate(post.date)}</p>
             </div>
           </div>
         ))}
