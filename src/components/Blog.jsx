@@ -65,6 +65,13 @@ export default function Blog({ post }) {
           published={published}
           setPublished={setPublished}
         />
+        <a href={`blog/${post.id}`}>
+          {post.comments.length === 0
+            ? "No comments"
+            : `${post.comments} ${
+                post.comments === 1 ? "Comment" : "Comments"
+              }`}
+        </a>
       </div>
     </div>
   );
