@@ -19,7 +19,7 @@ export default function BlogPage() {
       <header>
         <h1>Here I can see my posts.</h1>
       </header>
-      <AddPost />
+      <AddPost posts={posts} setPosts={setPosts} />
       {!posts.length ? (
         <h2>Loading...</h2>
       ) : (
