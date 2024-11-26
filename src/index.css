@@ -14,7 +14,6 @@ body {
 
 nav {
   width: 100vw;
-  margin-bottom: 3rem;
   ul {
     display: flex;
     justify-content: space-around;
@@ -39,11 +38,56 @@ header {
   padding: 3rem;
 }
 
-.postDetails {
+.postDetails,
+.iconContainer {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+  place-content: center;
+  place-items: center;
+  gap: 1rem;
+
+  img {
+    width: 1.5rem;
+  }
+}
+
+.iconContainer {
+  flex-direction: row;
+
+  button {
+    border: none;
+    background-color: transparent;
+  }
+
+  button:hover {
+    cursor: pointer;
+  }
 }
 
 .error {
   color: var(--error-color);
+}
+
+#loginForm,
+#registerForm {
+  color: rgb(40, 40, 40);
+  display: grid;
+  gap: 2rem;
+  background-color: var(--nav-background-color);
+  padding: 0 1rem 1rem;
+
+  div > label > input {
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+
+  button {
+    font-size: large;
+    place-self: center;
+    width: 250px;
+  }
+}
+
+#registerForm {
+  background-color: var(--posts-background-color);
 }
