@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { AuthContext } from "./AuthContext";
+import { authContext } from "./contexts/authContext.js";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import BlogPage from "./pages/BlogPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
@@ -27,9 +27,9 @@ function App() {
   const [token, updateToken] = useState("");
 
   return (
-    <AuthContext.Provider value={{ token, updateToken }}>
+    <authContext.Provider value={{ token, updateToken }}>
       <RouterProvider router={router} />
-    </AuthContext.Provider>
+    </authContext.Provider>
   );
 }
 

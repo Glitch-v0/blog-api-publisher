@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { reloadContext } from "../contexts/reloadContext";
 import PropTypes from "prop-types";
 import editIcon from "../assets/ic--baseline-edit.svg";
 import deleteIcon from "../assets/ic--round-delete.svg";
@@ -16,6 +18,12 @@ export default function IconContainer({
     saveEdit: PropTypes.func.isRequired,
   };
 
+  const reloadPosts = useContext(reloadContext);
+
+  const handleDelete = () => {
+    deletePost(postId).then(reloadPosts);
+  };
+
   return (
     <div className="iconContainer">
       {editing ? (
@@ -32,7 +40,7 @@ export default function IconContainer({
           <button onClick={() => setEditing(true)} title="Edit Post">
             <img src={editIcon} alt="edit icon" />
           </button>
-          <button onClick={() => deletePost(postId)} title="Delete Post">
+          <button onClick={() => handleDelete()} title="Delete Post">
             <img src={deleteIcon} alt="delete icon" />
           </button>
         </>

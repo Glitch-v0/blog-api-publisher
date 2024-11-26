@@ -9,6 +9,10 @@ export default function Blog({ post }) {
   const [title, setTitle] = useState(toTitleCase(post.title));
   const [content, setContent] = useState(post.content);
 
+  Blog.propTypes = {
+    post: PropTypes.object,
+  };
+
   const saveEdit = () => {
     // Add logic to save the updated content (e.g., via an API call)
     editPost(post.id, title, content);
@@ -16,9 +20,6 @@ export default function Blog({ post }) {
     setEditing(false); // Exit editing mode
   };
 
-  Blog.propTypes = {
-    post: PropTypes.object,
-  };
   console.log(post);
   return (
     <div className="post">

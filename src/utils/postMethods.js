@@ -1,43 +1,61 @@
 import { getToken } from "./authenticationMethods";
 
-export function createPost(title, content) {
-  fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/posts`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${getToken()}`,
-    },
-    body: JSON.stringify({ title: title, content: content }),
-  })
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.error(error));
+export async function createPost(title, content) {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/posts`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getToken()}`,
+        },
+        body: JSON.stringify({ title: title, content: content }),
+      }
+    );
+    const data = await response.json();
+    return console.log(data);
+  } catch (error) {
+    return console.error(error);
+  }
 }
 
-export function deletePost(postId) {
+export async function deletePost(postId) {
   console.log("Deleting post");
-  fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/posts/${postId}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${getToken()}`,
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.error(error));
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/posts/${postId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getToken()}`,
+        },
+      }
+    );
+    const data = await response.json();
+    return console.log(data);
+  } catch (error) {
+    return console.error(error);
+  }
 }
 
-export function editPost(postId, title, content) {
-  fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/posts/${postId}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${getToken()}`,
-    },
-    body: JSON.stringify({ title: title, content: content }),
-  })
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.error(error));
+export async function editPost(postId, title, content) {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/posts/${postId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getToken()}`,
+        },
+        body: JSON.stringify({ title: title, content: content }),
+      }
+    );
+    const data = await response.json();
+    return console.log(data);
+  } catch (error) {
+    return console.error(error);
+  }
 }
