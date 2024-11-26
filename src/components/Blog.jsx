@@ -1,7 +1,11 @@
+import PropTypes from "prop-types";
 import { toTitleCase, formatDate } from "../utils/stringMethods";
 import IconContainer from "../components/IconContainer";
 
 export default function Blog({ post }) {
+  Blog.propTypes = {
+    post: PropTypes.object,
+  };
   console.log(post);
   return (
     <div className="post">
