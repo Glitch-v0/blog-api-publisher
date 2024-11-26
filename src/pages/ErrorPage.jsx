@@ -7,11 +7,8 @@ export default function ErrorPage() {
   return (
     <>
       <NavBar />
-      <h1 className="error">{error.statusText || error.message}</h1>
-      <h2>
-        Whoopsies! You can&apos;t see my blog from this page. Try using a link
-        at the top.
-      </h2>
+      <h1 className="error">Error: {error.statusText || error.message}</h1>
+      <h2>Please go back and try again.</h2>
     </>
   );
 }

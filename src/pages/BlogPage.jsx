@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
+import Blog from "../components/Blog";
 import AddPost from "../components/AddPost";
-import toTitleCase from "../utils/stringMethods";
-import formatDate from "../utils/formatDate";
-import IconContainer from "../components/IconContainer";
 
 export default function BlogPage() {
   const [posts, setPosts] = useState([]);
@@ -22,21 +20,15 @@ export default function BlogPage() {
         <h1>Here I can see my posts.</h1>
       </header>
       <AddPost />
-      <div className="postContainer">
-        {posts.map((post) => (
-          <div className="post" key={post.id}>
-            <a href=""></a>
-            <h2>{toTitleCase(post.title)}</h2>
-            <p className="postBody">
-              <i>&ldquo;{post.content}&rdquo;</i>
-            </p>
-            <div className="postDetails">
-              <p>Date: {formatDate(post.date)}</p>
-              <IconContainer postId={post.id} />
-            </div>
-          </div>
-        ))}
-      </div>
+      {!posts.length ? (
+        <h2>Loading...</h2>
+      ) : (
+        <div className="postContainer">
+          {posts.map((post) => (
+            <Blog post={post} key={post.id} />
+          ))}
+        </div>
+      )}
     </>
   );
 }
