@@ -8,6 +8,7 @@ export default function Blog({ post }) {
   const [editing, setEditing] = useState(false);
   const [title, setTitle] = useState(toTitleCase(post.title));
   const [content, setContent] = useState(post.content);
+  const [published, setPublished] = useState(post.published);
 
   Blog.propTypes = {
     post: PropTypes.object,
@@ -15,7 +16,7 @@ export default function Blog({ post }) {
 
   const saveEdit = () => {
     // Add logic to save the updated content (e.g., via an API call)
-    editPost(post.id, title, content);
+    editPost(post.id, { title: title, content: content });
     console.log("Saving updated content:", content);
     setEditing(false); // Exit editing mode
   };
@@ -61,6 +62,8 @@ export default function Blog({ post }) {
           editing={editing}
           saveEdit={saveEdit}
           setEditing={setEditing}
+          published={published}
+          setPublished={setPublished}
         />
       </div>
     </div>

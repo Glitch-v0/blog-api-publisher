@@ -40,7 +40,7 @@ export async function deletePost(postId) {
   }
 }
 
-export async function editPost(postId, title, content) {
+export async function editPost(postId, changes) {
   try {
     const response = await fetch(
       `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/posts/${postId}`,
@@ -50,7 +50,7 @@ export async function editPost(postId, title, content) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getToken()}`,
         },
-        body: JSON.stringify({ title: title, content: content }),
+        body: JSON.stringify(changes),
       }
     );
     const data = await response.json();
