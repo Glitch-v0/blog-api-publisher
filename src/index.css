@@ -27,6 +27,10 @@ nav {
   }
 }
 
+h3 {
+  font-weight: normal;
+}
+
 .postContainer,
 header {
   padding: 2rem;
@@ -88,6 +92,7 @@ header {
 
   .comment {
     display: flex;
+    width: 100vw;
     flex-direction: column;
     place-items: center;
     place-content: center;
@@ -105,8 +110,26 @@ header {
   }
 }
 
-.commentsContainer:nth-child(odd) {
+.commentsContainer .comment:nth-child(even) {
+  background-color: white;
+}
+
+.addComment {
+  display: flex;
+  padding: 2rem;
+  place-content: center;
+  place-items: center;
   background-color: var(--post-color);
+
+  form {
+    padding: 0rem;
+
+    h2 {
+      padding: 0rem;
+      padding-bottom: 1rem;
+      margin: 0rem;
+    }
+  }
 }
 
 .error {

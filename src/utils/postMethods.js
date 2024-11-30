@@ -17,8 +17,8 @@ export async function createPost(title, content, setError) {
         body: JSON.stringify({ title: title, content: content }),
       }
     );
-    const data = await response.json();
-    return console.log(data);
+    await response.json();
+    return true;
   } catch (error) {
     setError(error);
     return console.error(error);
@@ -42,8 +42,8 @@ export async function deletePost(postId, setError) {
         },
       }
     );
-    const data = await response.json();
-    return console.log(data);
+    await response.json();
+    return true;
   } catch (error) {
     setError(error);
     return console.error(error);
@@ -67,8 +67,8 @@ export async function editPost(postId, changes, setError) {
         body: JSON.stringify(changes),
       }
     );
-    const data = await response.json();
-    return console.log(data);
+    await response.json();
+    return true;
   } catch (error) {
     setError(error);
     return console.error(error);

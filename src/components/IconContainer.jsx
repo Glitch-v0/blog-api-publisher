@@ -23,6 +23,7 @@ export default function IconContainer({
     saveEdit: PropTypes.func.isRequired,
     published: PropTypes.bool.isRequired,
     setPublished: PropTypes.func.isRequired,
+    setError: PropTypes.func.isRequired,
   };
 
   // Allows reloading posts

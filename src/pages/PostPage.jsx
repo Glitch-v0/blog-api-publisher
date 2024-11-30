@@ -1,50 +1,55 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { reloadContext } from "../contexts/reloadContext";
 import NavBar from "../components/NavBar";
-import Blog from "../components/Blog";
-import AddPost from "../components/AddPost";
+import AddComment from "../components/AddComment";
+import { loadComments } from "../utils/commentMethods";
+import { formatDate } from "../utils/stringMethods";
 import upvoteIcon from "../assets/bxs--upvote.svg";
 import downvoteIcon from "../assets/bxs--downvote.svg";
 
 export default function PostPage() {
   const [comments, setComments] = useState([]);
+  const [post, setPost] = useState({});
   const { postId } = useParams();
   const [loadPostError, setError] = useState(null);
 
-  const loadComments = () => {
-    fetch(
-      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/posts/${postId}/comments`
-    )
-      .then((response) => response.json())
-      .then((data) => setComments(data))
-      .catch((error) => {
-        console.error(error);
-        setTimeout(() => setError(error), 1000); // Delay error display by 1 second
-      });
-  };
-
   //Get comments
   useEffect(() => {
-    loadComments();
-  }, []);
+    loadComments(postId, setComments, setPost, setError);
+  }, [postId]);
 
   return (
     <div>
       <NavBar />
       <header>
-        <h1>Comments</h1>
+        <h1>{post.title}</h1>
+        <h2>
+          <i>{post.content}</i>
+        </h2>
+        <h3>Date: {`${formatDate(post.date)}`}</h3>
       </header>
-      {/* <AddComment loadPosts={loadPosts} /> */}
+      <AddComment
+        loadComments={loadComments}
+        setComments={setComments}
+        setPost={setPost}
+        setError={setError}
+      />
       {loadPostError ? (
         <h2>Error: {loadPostError.message || "Failed to load."}</h2>
       ) : !comments.length ? (
-        <h2>Loading...</h2>
+        <h2>There are no comments for this post yet.</h2>
       ) : (
         <div className="commentsContainer">
+          <h1>Comments</h1>
           {comments.map((comment) => (
             <div className="comment" key={comment.id}>
-              <p>{comment.content}</p>
+              <h2>{comment.user.username}</h2>
+              <h3>
+                <i>&ldquo;{comment.content}&rdquo;</i>
+              </h3>
+
+              <h3>Date: {`${formatDate(comment.date)}`}</h3>
+
               <div className="votes">
                 <img src={upvoteIcon} alt="upvote" title="upvote" />
                 <img src={downvoteIcon} alt="downvote" title="downvote" />
