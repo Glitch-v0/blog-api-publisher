@@ -11,7 +11,7 @@ export default function NavBar() {
           <Link to="/blog">Blog</Link>
         </li>
         <li>
-          <Link to="/contact">Contact</Link>
+          <Link to="/logout">Logout</Link>
         </li>
       </ul>
     </nav>

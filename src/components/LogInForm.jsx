@@ -5,20 +5,29 @@ import { useNavigate } from "react-router-dom";
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState(null);
 
   const navigate = useNavigate();
 
   return (
     <form
-      action={`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/login`}
       id="loginForm"
       method="post"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        logIn(email, password, navigate);
+        try {
+          setLoginError(null);
+          await logIn(email, password, navigate);
+        } catch (error) {
+          console.log("Updating error state!");
+          setLoginError(error.message);
+        }
       }}
     >
       <h2>Log In</h2>
+
+      {loginError ? <p className="error">{loginError}</p> : null}
+
       <div>
         <label>
           <h3>Email</h3>

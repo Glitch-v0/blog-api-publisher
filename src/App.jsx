@@ -3,8 +3,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { authContext } from "./contexts/authContext.js";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import BlogPage from "./pages/BlogPage.jsx";
-import ContactPage from "./pages/ContactPage.jsx";
+import PostPage from "./pages/PostPage.jsx";
 import EntryPage from "./pages/EntryPage.jsx";
+import LogoutPage from "./pages/LogoutPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,8 +19,13 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/contact",
-    element: <ContactPage />,
+    path: "/blog/:postId",
+    element: <PostPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/logout",
+    element: <LogoutPage />,
   },
 ]);
 

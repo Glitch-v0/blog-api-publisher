@@ -14,6 +14,7 @@ export default function IconContainer({
   saveEdit,
   published,
   setPublished,
+  setError,
 }) {
   IconContainer.propTypes = {
     postId: PropTypes.string.isRequired,
@@ -28,11 +29,13 @@ export default function IconContainer({
   const reloadPosts = useContext(reloadContext);
 
   const handleDelete = () => {
-    deletePost(postId).then(reloadPosts);
+    deletePost(postId, setError).then(reloadPosts);
   };
 
   const togglePublish = () => {
-    editPost(postId, { published: !published }).then(setPublished(!published));
+    editPost(postId, { published: !published }, setError).then(
+      setPublished(!published)
+    );
   };
 
   return (

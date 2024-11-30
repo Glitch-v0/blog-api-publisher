@@ -3,20 +3,15 @@ import { reloadContext } from "../contexts/reloadContext";
 import NavBar from "../components/NavBar";
 import Blog from "../components/Blog";
 import AddPost from "../components/AddPost";
+import { loadPosts } from "../utils/postMethods";
 
 export default function BlogPage() {
   const [posts, setPosts] = useState([]);
-
-  const loadPosts = () => {
-    console.log("Loading posts");
-    fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/posts`)
-      .then((response) => response.json())
-      .then((data) => setPosts(data));
-  };
+  const [loadBlogError, setError] = useState(null);
 
   // Get posts
   useEffect(() => {
-    loadPosts();
+    loadPosts(setPosts, setError);
   }, []);
 
   return (
@@ -25,7 +20,13 @@ export default function BlogPage() {
       <header>
         <h1>Here I can see my posts.</h1>
       </header>
-      <AddPost loadPosts={loadPosts} />
+
+      {loadBlogError ? (
+        <h2 className="error">
+          Error: {loadBlogError.message || "Failed to load blogs."}
+        </h2>
+      ) : null}
+      <AddPost loadPosts={loadPosts} setError={setError} />
       {!posts.length ? (
         <h2>Loading...</h2>
       ) : (

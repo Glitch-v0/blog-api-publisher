@@ -9,14 +9,14 @@ export default function Blog({ post }) {
   const [title, setTitle] = useState(toTitleCase(post.title));
   const [content, setContent] = useState(post.content);
   const [published, setPublished] = useState(post.published);
+  const [blogError, setError] = useState(null);
 
   Blog.propTypes = {
     post: PropTypes.object,
   };
 
   const saveEdit = () => {
-    // Add logic to save the updated content (e.g., via an API call)
-    editPost(post.id, { title: title, content: content });
+    editPost(post.id, { title: title, content: content }, setError);
     console.log("Saving updated content:", content);
     setEditing(false); // Exit editing mode
   };
@@ -29,7 +29,7 @@ export default function Blog({ post }) {
       {editing ? (
         <div className="postBody">
           <label htmlFor="title">
-            Title:
+            <h2>Title:</h2>
             <input
               type="text"
               value={title}
@@ -38,7 +38,7 @@ export default function Blog({ post }) {
             />
           </label>
           <label htmlFor="content">
-            Content
+            <h2>Content:</h2>
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
@@ -48,6 +48,9 @@ export default function Blog({ post }) {
         </div>
       ) : (
         <div className="postBody">
+          {blogError ? (
+            <h2 className="error">Error: {blogError.message}</h2>
+          ) : null}
           <h2>{title}</h2>
           <p>
             <i>&ldquo;{content}&rdquo;</i>
@@ -64,8 +67,9 @@ export default function Blog({ post }) {
           setEditing={setEditing}
           published={published}
           setPublished={setPublished}
+          setError={setError}
         />
-        <a href={`blog/${post.id}`}>
+        <a href={`blog/${post.id}`} title="View comments">
           {post.comments.length === 0
             ? "No comments"
             : `${post.comments} ${

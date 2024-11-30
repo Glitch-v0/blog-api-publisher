@@ -3,7 +3,10 @@
   --posts-background-color: #eee6fd;
   --post-color: hsl(260, 80%, 90%);
   --posts-border-color: #fff;
-  --error-color: rgb(240, 78, 78);
+  --error-color: #d8000c;
+  --error-background-color: #ffbaba;
+  --success-color: #4bb543;
+  --success-background-color: #e6efc2;
 }
 
 body {
@@ -76,8 +79,46 @@ header {
   }
 }
 
+.commentsContainer {
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  place-items: center;
+  gap: 1rem;
+
+  .comment {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    place-content: center;
+    padding: 1rem;
+    gap: 1rem;
+
+    img {
+      width: 1.5rem;
+    }
+
+    .votes {
+      display: flex;
+      gap: 2rem;
+    }
+  }
+}
+
+.commentsContainer:nth-child(odd) {
+  background-color: var(--post-color);
+}
+
 .error {
   color: var(--error-color);
+  background-color: var(--error-background-color);
+  padding: 0.5rem;
+}
+
+.success {
+  color: var(--success-color);
+  background-color: var(--success-background-color);
+  padding: 0.5rem;
 }
 
 #loginForm,
