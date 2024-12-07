@@ -153,8 +153,8 @@ header {
 }
 
 .selectedVote {
-  filter: invert(13%) sepia(89%) saturate(5186%) hue-rotate(357deg)
-    brightness(88%) contrast(135%);
+  filter: invert(10%) sepia(93%) saturate(7479%) hue-rotate(12deg)
+    brightness(93%) contrast(118%);
 }
 
 .unselectedVote {
