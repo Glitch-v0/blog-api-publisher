@@ -80,7 +80,5 @@ export async function loadPosts(setPosts, setError) {
   fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/posts`)
     .then((response) => response.json())
     .then((data) => setPosts(data))
-    .catch((error) => {
-      setTimeout(() => setError(error), 1500); // Delay error display by 1 second
-    });
+    .catch((error) => setError(error));
 }

@@ -19,14 +19,12 @@ export default function AddComment({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const title = e.target.title.value;
     const content = e.target.content.value;
-    await createComment(postId, title, content)
+    await createComment(postId, content)
       .then(() => {
         loadComments(postId, setComments, setPost, setError);
       })
       .catch((error) => {
-        console.error(error);
         setError(error);
       });
   };
@@ -34,8 +32,7 @@ export default function AddComment({
     <div className="addComment">
       <form onSubmit={handleSubmit}>
         <h2>Create a new comment!</h2>
-        <input type="text" name="title" placeholder="Title" />
-        <input type="text" name="content" placeholder="content" />
+        <input type="text" name="content" placeholder="Comment" />
         <button type="submit">Submit</button>
       </form>
     </div>

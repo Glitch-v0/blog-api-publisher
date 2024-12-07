@@ -96,16 +96,12 @@ header {
     flex-direction: column;
     place-items: center;
     place-content: center;
-    padding: 1rem;
+    padding: 1.25rem;
     gap: 1rem;
 
-    img {
-      width: 1.5rem;
-    }
-
-    .votes {
-      display: flex;
-      gap: 2rem;
+    h2 {
+      padding: 0;
+      margin: 0;
     }
   }
 }
@@ -130,6 +126,44 @@ header {
       margin: 0rem;
     }
   }
+}
+
+.votesContainer {
+  display: flex;
+  gap: 1rem;
+  place-items: center;
+  place-content: center;
+  padding-bottom: 1rem;
+
+  button {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+  }
+
+  button:hover {
+    cursor: pointer;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.selectedVote {
+  filter: invert(13%) sepia(89%) saturate(5186%) hue-rotate(357deg)
+    brightness(88%) contrast(135%);
+}
+
+.unselectedVote {
+  filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%);
+}
+
+.selectedVote:hover,
+.unselectedVote:hover {
+  scale: 1.5;
 }
 
 .error {

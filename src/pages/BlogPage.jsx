@@ -18,7 +18,7 @@ export default function BlogPage() {
     <reloadContext.Provider value={loadPosts}>
       <NavBar />
       <header>
-        <h1>Here I can see my posts.</h1>
+        <AddPost loadPosts={loadPosts} setError={setError} />
       </header>
 
       {loadBlogError ? (
@@ -26,7 +26,6 @@ export default function BlogPage() {
           Error: {loadBlogError.message || "Failed to load blogs."}
         </h2>
       ) : null}
-      <AddPost loadPosts={loadPosts} setError={setError} />
       {!posts.length ? (
         <h2>Loading...</h2>
       ) : (

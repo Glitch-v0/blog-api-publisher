@@ -4,8 +4,7 @@ import NavBar from "../components/NavBar";
 import AddComment from "../components/AddComment";
 import { loadComments } from "../utils/commentMethods";
 import { formatDate } from "../utils/stringMethods";
-import upvoteIcon from "../assets/bxs--upvote.svg";
-import downvoteIcon from "../assets/bxs--downvote.svg";
+import VotesContainer from "../components/VotesContainer";
 
 export default function PostPage() {
   const [comments, setComments] = useState([]);
@@ -49,11 +48,10 @@ export default function PostPage() {
               </h3>
 
               <h3>Date: {`${formatDate(comment.date)}`}</h3>
-
-              <div className="votes">
-                <img src={upvoteIcon} alt="upvote" title="upvote" />
-                <img src={downvoteIcon} alt="downvote" title="downvote" />
-              </div>
+              <VotesContainer
+                votes={comment.votes}
+                userVote={comment.userVote}
+              />
             </div>
           ))}
         </div>
