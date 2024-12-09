@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { reloadContext } from "../contexts/reloadContext";
+
 import PropTypes from "prop-types";
 import editIcon from "../assets/ic--baseline-edit.svg";
 import deleteIcon from "../assets/ic--round-delete.svg";
 import publishIcon from "../assets/fluent-mdl2--publish-content.svg";
 import unpublishIcon from "../assets/fluent-mdl2--unpublish-content.svg";
-import { editPost, deletePost } from "../utils/postMethods";
+import { editPost, deletePost, loadPosts } from "../utils/postMethods";
 
 export default function IconContainer({
   postId,
@@ -15,6 +15,7 @@ export default function IconContainer({
   published,
   setPublished,
   setError,
+  setPosts,
 }) {
   IconContainer.propTypes = {
     postId: PropTypes.string.isRequired,
@@ -24,13 +25,13 @@ export default function IconContainer({
     published: PropTypes.bool.isRequired,
     setPublished: PropTypes.func.isRequired,
     setError: PropTypes.func.isRequired,
+    setPosts: PropTypes.func.isRequired,
   };
 
-  // Allows reloading posts
-  const reloadPosts = useContext(reloadContext);
-
-  const handleDelete = () => {
-    deletePost(postId, setError).then(reloadPosts);
+  const handleDelete = async () => {
+    await deletePost(postId, setError).then(() =>
+      loadPosts(setPosts, setError)
+    );
   };
 
   const togglePublish = () => {

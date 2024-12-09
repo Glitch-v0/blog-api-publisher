@@ -4,7 +4,7 @@ import { toTitleCase, formatDate } from "../utils/stringMethods";
 import IconContainer from "../components/IconContainer";
 import { editPost } from "../utils/postMethods";
 
-export default function Blog({ post }) {
+export default function Blog({ post, setPosts }) {
   const [editing, setEditing] = useState(false);
   const [title, setTitle] = useState(toTitleCase(post.title));
   const [content, setContent] = useState(post.content);
@@ -13,15 +13,13 @@ export default function Blog({ post }) {
 
   Blog.propTypes = {
     post: PropTypes.object,
+    setPosts: PropTypes.func,
   };
 
   const saveEdit = () => {
     editPost(post.id, { title: title, content: content }, setError);
-    console.log("Saving updated content:", content);
     setEditing(false); // Exit editing mode
   };
-
-  console.log(post);
   return (
     <div className="post">
       <a href=""></a>
@@ -68,6 +66,7 @@ export default function Blog({ post }) {
           published={published}
           setPublished={setPublished}
           setError={setError}
+          setPosts={setPosts}
         />
         <a href={`blog/${post.id}`} title="View comments">
           {post.comments.length === 0

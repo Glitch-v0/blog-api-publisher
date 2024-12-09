@@ -1,17 +1,17 @@
 import propTypes from "prop-types";
-import { createPost } from "../utils/postMethods";
+import { loadPosts, createPost } from "../utils/postMethods";
 
-export default function AddPost({ loadPosts, setError }) {
+export default function AddPost({ setError, setPosts }) {
   AddPost.propTypes = {
-    loadPosts: propTypes.func,
     setError: propTypes.func,
+    setPosts: propTypes.func,
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const title = e.target.title.value;
     const body = e.target.body.value;
     createPost(title, body, setError).then(() => {
-      loadPosts();
+      loadPosts(setPosts, setError);
     });
   };
   return (

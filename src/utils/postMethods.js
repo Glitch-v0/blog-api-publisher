@@ -1,10 +1,10 @@
-import { getToken } from "./authenticationMethods";
+import { getToken, checkTokenExpiration } from "./authenticationMethods";
 
 export async function createPost(title, content, setError) {
   try {
     //Check for token first
-    if (!getToken()) {
-      throw new Error("Must log in to create post.");
+    if (!checkTokenExpiration()) {
+      throw new Error("Your session has expired. Please log in again.");
     }
     const response = await fetch(
       `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/posts`,
@@ -26,7 +26,6 @@ export async function createPost(title, content, setError) {
 }
 
 export async function deletePost(postId, setError) {
-  console.log("Deleting post");
   try {
     //Check for token first
     if (!getToken()) {
@@ -76,7 +75,6 @@ export async function editPost(postId, changes, setError) {
 }
 
 export async function loadPosts(setPosts, setError) {
-  console.log("Loading post");
   fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/posts`)
     .then((response) => response.json())
     .then((data) => setPosts(data))

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { reloadContext } from "../contexts/reloadContext";
 import NavBar from "../components/NavBar";
 import Blog from "../components/Blog";
 import AddPost from "../components/AddPost";
@@ -15,10 +14,10 @@ export default function BlogPage() {
   }, []);
 
   return (
-    <reloadContext.Provider value={loadPosts}>
+    <div>
       <NavBar />
       <header>
-        <AddPost loadPosts={loadPosts} setError={setError} />
+        <AddPost setError={setError} setPosts={setPosts} />
       </header>
 
       {loadBlogError ? (
@@ -31,10 +30,10 @@ export default function BlogPage() {
       ) : (
         <div className="postContainer">
           {posts.map((post) => (
-            <Blog post={post} key={post.id} />
+            <Blog post={post} key={post.id} setPosts={setPosts} />
           ))}
         </div>
       )}
-    </reloadContext.Provider>
+    </div>
   );
 }

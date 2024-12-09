@@ -6,6 +6,17 @@ export function getToken() {
   return localStorage.getItem("token");
 }
 
+export function checkTokenExpiration() {
+  const token = getToken();
+  if (!token) {
+    throw new Error("Must log in to create post.");
+  }
+  const decodedToken = JSON.parse(atob(token.split(".")[1]));
+  const expirationTime = decodedToken.exp * 1000;
+  const currentTime = Date.now();
+  return expirationTime > currentTime;
+}
+
 export async function register(email, username, password) {
   console.log("Trying to log in");
   try {
