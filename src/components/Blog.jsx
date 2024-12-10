@@ -22,8 +22,6 @@ export default function Blog({ post, setPosts }) {
   };
   return (
     <div className="post">
-      <a href=""></a>
-
       {editing ? (
         <div className="postBody">
           <label htmlFor="title">

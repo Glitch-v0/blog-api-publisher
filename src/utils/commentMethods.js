@@ -55,8 +55,9 @@ export async function createComment(postId, content) {
   }
 }
 
-export async function voteComment(commentId, vote) {
+export async function voteComment(commentId, vote, htmlMethod) {
   console.log("Voting comment");
+  const convertedVoteValue = vote ? 1 : -1;
   try {
     //Check for token first
     if (!getToken()) {
@@ -67,12 +68,69 @@ export async function voteComment(commentId, vote) {
         import.meta.env.VITE_REACT_APP_BACKEND_URL
       }/comments/${commentId}/vote`,
       {
-        method: "POST",
+        method: htmlMethod,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getToken()}`,
         },
-        body: JSON.stringify({ vote: vote }),
+        body: JSON.stringify({ value: convertedVoteValue }),
+      }
+    )
+      .then((response) => response.json())
+      .finally(() => {
+        return true;
+      });
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function deleteComment(commentId, postId) {
+  console.log(`Deleting post ${postId}'s comment ${commentId}`);
+  try {
+    //Check for token first
+    if (!getToken()) {
+      throw new Error("Must log in to delete comment.");
+    }
+    await fetch(
+      `${
+        import.meta.env.VITE_REACT_APP_BACKEND_URL
+      }/posts/${postId}/comments/${commentId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getToken()}`,
+        },
+      }
+    )
+      .then((response) => response.json())
+      .finally(() => {
+        return true;
+      });
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function editComment(commentId, content) {
+  console.log("Editing comment");
+  try {
+    //Check for token first
+    if (!getToken()) {
+      throw new Error("Must log in to edit comment.");
+    }
+    await fetch(
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/comments/${commentId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getToken()}`,
+        },
+        body: JSON.stringify({ content: content }),
       }
     )
       .then((response) => response.json())

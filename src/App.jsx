@@ -1,6 +1,4 @@
-import { useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { authContext } from "./contexts/authContext.js";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import BlogPage from "./pages/BlogPage.jsx";
 import PostPage from "./pages/PostPage.jsx";
@@ -30,13 +28,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const [token, updateToken] = useState("");
-
-  return (
-    <authContext.Provider value={{ token, updateToken }}>
-      <RouterProvider router={router} />
-    </authContext.Provider>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

@@ -1,5 +1,3 @@
-import { useContext } from "react";
-
 import PropTypes from "prop-types";
 import editIcon from "../assets/ic--baseline-edit.svg";
 import deleteIcon from "../assets/ic--round-delete.svg";

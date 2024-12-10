@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import AddComment from "../components/AddComment";
+import CommentIconContainer from "../components/CommentIconContainer";
 import { loadComments } from "../utils/commentMethods";
 import { formatDate } from "../utils/stringMethods";
 import VotesContainer from "../components/VotesContainer";
@@ -33,24 +34,37 @@ export default function PostPage() {
         setPost={setPost}
         setError={setError}
       />
-      {loadPostError ? (
-        <h2>Error: {loadPostError.message || "Failed to load."}</h2>
-      ) : !comments.length ? (
+      {!comments.length ? (
         <h2>There are no comments for this post yet.</h2>
       ) : (
         <div className="commentsContainer">
+          {loadPostError ? (
+            <h2 className="error">
+              Error: {loadPostError.message || "Failed to load."}
+            </h2>
+          ) : null}
           <h1>Comments</h1>
           {comments.map((comment) => (
-            <div className="comment" key={comment.id}>
+            <div
+              className={comment.isOwner ? "comment commentOwner" : "comment"}
+              key={comment.id}
+            >
               <h2>{comment.user.username}</h2>
               <h3>
                 <i>&ldquo;{comment.content}&rdquo;</i>
               </h3>
 
+              <CommentIconContainer
+                commentId={comment.id}
+                setComments={setComments}
+                setPost={setPost}
+              />
+
               <h3>Date: {`${formatDate(comment.date)}`}</h3>
               <VotesContainer
                 votes={comment.votes}
                 userVote={comment.userVote}
+                commentId={comment.id}
               />
             </div>
           ))}
