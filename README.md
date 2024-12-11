@@ -1,8 +1,17 @@
-# React + Vite
+# blog-api-publisher
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a react front-end for a blog api with users, posts, comments, and votes for those comments.
+This publisher front-end is only for admins, users would use the viewer frontend.
 
-Currently, two official plugins are available:
+Admins: Can create, read, update, and delete posts; and create, read, and delete comments.
+Users: Can read posts; and create, read, and update comments.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Github Links:
+https://github.com/Glitch-v0/blog-api-backend
+https://github.com/Glitch-v0/blog-api-publisher (current)
+https://github.com/Glitch-v0/blog-api-viewer
+
+Live Interactive Links:
+https://blog-backend.jonesy.monster/api/v1
+https://blog-publisher.jonesy.monster/
+https://blog.jonesy.monster/
